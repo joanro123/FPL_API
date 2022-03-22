@@ -1,0 +1,53 @@
+﻿@page
+@model FPL_API.Pages.IndexModel
+@{
+}
+
+<div class="text-center">
+    <h1 class="display-4">Defenders</h1>
+</div>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th style="padding-right: 20px">Position</th>
+        <th>Team</th>
+        <th style="padding-right: 20px">Total points</th>
+        <th style="padding-right: 20px">Points per game</th>
+        <th style="padding-right: 20px">Goals</th>
+        <th style="padding-right: 20px">Assists</th>
+        <th style="padding-right: 20px">Bonus</th>
+        <th style="padding-right: 20px">Minutes</th>
+        <th>Points per minute</th>
+    </tr>
+    @foreach (var element in Model.Statistic.elements.OrderByDescending(o => o.total_points))
+    {
+        foreach (var team in Model.Statistic.teams)
+        {
+            foreach (var e_type in Model.Statistic.element_types)
+            {
+                if (element.team_code == team.code && e_type.id == element.element_type && e_type.plural_name_short == "DEF")
+                {
+<tr>
+    <td><p>@element.second_name, @element.first_name</p></td>
+    <td><p>@e_type.plural_name_short</p></td>
+    <td style="padding-right: 20px"><p>@team.name</p></td>
+    <td><p>@element.total_points</p></td>
+    <td><p>@element.points_per_game</p></td>
+    <td><p>@element.goals_scored</p></td>
+    <td><p>@element.assists</p></td>
+    <td><p>@element.bonus</p></td>
+    <td><p>@element.minutes</p></td>
+    @if (element.minutes != 0 && element.total_points != 0)
+    {
+        {
+            //   double pointsPerMinute = (double)element.total_points / (double)element.minutes;
+            <td><p>@element.PointsPerMinute</p></td>
+        }
+    }
+</tr>
+                }
+            }
+        }
+    }
+</table>
