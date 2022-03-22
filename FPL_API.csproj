@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>fpl_api-0abe1a37-8154-4b9d-b86d-23dd909273f0</UserSecretsId>
   </PropertyGroup>
 
 </Project>
